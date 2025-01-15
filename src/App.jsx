@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Navbar from "./componants/Navbar";
 import PostList from "./componants/PostList";
-import PostDetail from "./componants/PostDetail";
+import PostDetail from "./components/PostDetail"; // Correct the directory name to "components"
+
 import About from "./componants/About";
 import Contact from "./componants/Contact";
 import AuthModal from "./componants/AuthModal";
