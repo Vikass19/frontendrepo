@@ -1,0 +1,58 @@
+
+
+/* Global Variables */
+:root {
+    --color-primary: hsl(220, 70%, 50%);
+    --color-secondary: hsl(10, 75%, 60%);
+    --color-neutral: hsl(0, 0%, 20%);
+    --color-background: hsl(45, 90%, 95%);
+    --color-hover-primary: hsl(220, 80%, 40%);
+    --color-hover-secondary: hsl(10, 85%, 50%);
+    --font-family-body: 'Roboto', sans-serif;
+    --font-family-heading: 'Merriweather', serif;
+}
+  
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+body {
+    font-family: var(--font-family-body);
+    background-color: var(--color-background);
+    color: var(--color-neutral);
+    font-size: 16px;
+    line-height: 1.6;
+}
+  
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-heading);
+    color: var(--color-primary);
+}
+  
+a {
+    text-decoration: none;
+    color: var(--color-secondary);
+    transition: color 0.3s;
+}
+  
+a:hover {
+    color: var(--color-primary);
+}
+  
+button {
+    font-family: var(--font-family-body);
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+  
+button:hover {
+    background-color: var(--color-hover-secondary);
+}
