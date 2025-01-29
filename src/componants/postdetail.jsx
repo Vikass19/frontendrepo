@@ -10,7 +10,7 @@ const PostDetail = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/posts/${postId}`);
+        const response = await fetch(`http://54.252.157.69:8000/api/posts/${postId}`);
         const data = await response.json();
         setPost(data);
         setLoading(false);

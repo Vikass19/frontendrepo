@@ -28,7 +28,7 @@ const Newsletter = () => {
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/newsletter/subscribe/", {
+      const response = await fetch("http://54.252.157.69:8000/api/newsletter/subscribe/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

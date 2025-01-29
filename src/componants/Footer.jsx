@@ -28,7 +28,7 @@ const Footer = () => {
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/subscribe/", {
+      const response = await fetch("http://54.252.157.69:8000/api/subscribe/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

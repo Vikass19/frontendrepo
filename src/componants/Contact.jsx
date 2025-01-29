@@ -1,90 +1,121 @@
-import React, { useState } from 'react';
-import emailjs from '@emailjs/browser';
-import './Contact.css';
+import React, { useState } from "react";
+import emailjs from "emailjs-com";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSent, setIsSent] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isError, setIsError] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
-    try {
-      await emailjs.send(
-        'YOUR_SERVICE_ID',
-        'YOUR_TEMPLATE_ID',
-        {
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
+    emailjs
+      .sendForm(
+        "service_e1uehvf", // Replace with your EmailJS Service ID
+        "template_7kgmx0r", // Replace with your EmailJS Template ID
+        e.target,
+        "HbBAmmupbnwKuzfcK" // Replace with your EmailJS User ID
+      )
+      .then(
+        (result) => {
+          console.log("Success:", result.text);
+          setIsSubmitted(true);
+          e.target.reset(); // Clear the form
         },
-        'YOUR_PUBLIC_KEY'
+        (error) => {
+          console.error("Error:", error.text);
+          setIsError(true);
+        }
       );
-      setIsSent(true);
-      setFormData({ name: '', email: '', message: '' });
-    } catch (error) {
-      console.error('Failed to send message:', error);
-    } finally {
-      setIsSubmitting(false);
-    }
   };
 
   return (
-    <div className="contact-wrapper">
-      <h1 className="contact-title">Contact Us</h1>
-      <p className="contact-subtitle">
-        Feel free to reach out. We'll get back to you as soon as possible!
-      </p>
+    <section id="contact" className="bg-gray-900 text-white py-16 px-6" data-aos="fade-down">
+      {/* Section Header */}
+      <div className="text-center mb-10">
+        <h2 className="text-4xl font-bold">
+          Contact <span className="text-teal-400">Me</span>
+        </h2>
+      </div>
 
-      {isSent && <p className="success-message">Message sent successfully!</p>}
+      {/* Contact Form Wrapper */}
+      <div className="max-w-3xl mx-auto bg-gray-800 p-8 rounded-lg shadow-lg" data-aos="zoom-in">
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Message Icon */}
+          <div className="flex items-center justify-center space-x-2 text-teal-400 text-lg">
+            <i className="fa-solid fa-paper-plane"></i>
+            <span className="font-medium">Message Me</span>
+          </div>
 
-      <form onSubmit={handleSubmit} className="contact-form">
-        <div className="form-field">
-          <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+          {/* Input Fields */}
+          <div className="flex flex-col space-y-4">
+            {/* Name Input */}
+            <input
+              type="text"
+              name="user_name"
+              placeholder="Enter your name"
+              className="bg-gray-700 text-white p-4 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400"
+              required
+            />
+
+            {/* Email Input */}
+            <input
+              type="email"
+              name="user_email"
+              placeholder="Enter your email"
+              className="bg-gray-700 text-white p-4 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400"
+              required
+            />
+
+            {/* Message Textarea */}
+            <textarea
+              name="message"
+              rows="4"
+              placeholder="Enter your message"
+              className="bg-gray-700 text-white p-4 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400"
+              required
+            ></textarea>
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full bg-teal-500 text-black py-3 rounded-md font-semibold hover:bg-teal-600 transition duration-300"
+          >
+            Send
+          </button>
+        </form>
+      </div>
+
+      {/* Success/Failure Popup */}
+      {isSubmitted && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white text-gray-900 p-6 rounded-lg shadow-lg text-center space-y-4">
+            <h3 className="text-2xl font-bold">Thank You!</h3>
+            <p>Your message has been sent successfully.</p>
+            <button
+              onClick={() => setIsSubmitted(false)}
+              className="bg-teal-500 hover:bg-teal-600 text-white py-2 px-4 rounded-md"
+            >
+              Close
+            </button>
+          </div>
         </div>
-        <div className="form-field">
-          <input
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
+      )}
+      {isError && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white text-gray-900 p-6 rounded-lg shadow-lg text-center space-y-4">
+            <h3 className="text-2xl font-bold text-red-500">Oops!</h3>
+            <p>Something went wrong. Please try again later.</p>
+            <button
+              onClick={() => setIsError(false)}
+              className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md"
+            >
+              Close
+            </button>
+          </div>
         </div>
-        <div className="form-field">
-          <textarea
-            name="message"
-            rows="5"
-            placeholder="Your Message"
-            value={formData.message}
-            onChange={handleChange}
-            required
-          ></textarea>
-        </div>
-        <button type="submit" className={`submit-btn ${isSubmitting ? 'loading' : ''}`} disabled={isSubmitting}>
-          {isSubmitting ? 'Sending...' : 'Send Message'}
-        </button>
-      </form>
-    </div>
+      )}
+    </section>
   );
 };
 
