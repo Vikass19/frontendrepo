@@ -11,7 +11,8 @@ import AuthModal from "./componants/AuthModal";
 import Footer from "./componants/Footer";
 import ScrollToTop from "./componants/ScrollToTop";
 
-
+import DarkModeToggle from './componants/DarkModeToggle';
+import SubscribeBox from "./componants/subscribebox";
 
 
 const App = () => {
@@ -36,7 +37,7 @@ const App = () => {
   const init = () => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://54.252.157.69:8000/api/categories/");
+        const response = await fetch("http://54.252.157.69/api/categories/");
         if (response.ok) {
           const data = await response.json();
           setCategories(data);
@@ -61,7 +62,7 @@ const App = () => {
   // Save user data after login
   useEffect(() => {
     if (isAuthenticated) {
-      fetch("http://54.252.157.69:8000/api/user-profile/", {
+      fetch("http://54.252.157.69/api/user-profile/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -147,13 +148,14 @@ const App = () => {
 
       {/* Dark Mode Toggle */}
       
-      <div id="paypal-container-K529WXYVSBJ7Y"></div>
+      
       <div
         style={{
           backgroundColor: darkMode ? "#000000" : "#fff",
           color: darkMode ? "#fff" : "#000",
         }}
-      >        <Routes>
+      > 
+        <Routes>
           <Route
             path="/"
             element={<PostList searchQuery={searchQuery} category={category} />}
@@ -168,6 +170,7 @@ const App = () => {
 
           
         </Routes>
+        <SubscribeBox />
        <ScrollToTop />
         <Footer />
        

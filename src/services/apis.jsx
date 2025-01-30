@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Base API URL (adjust this as needed for your backend)
-const API_BASE_URL = 'http://54.252.157.69:8000/api/'; // Base URL for API
+const API_BASE_URL = 'http://54.252.157.69/api/'; // Base URL for API
 
 // Fetch all posts
 export const getPosts = async () => {

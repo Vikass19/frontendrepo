@@ -11,7 +11,7 @@ const PostList = ({ searchQuery, category }) => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      let url = `http://54.252.157.69:8000/api/posts/`;
+      let url = `http://54.252.157.69/api/posts/`;
       let params = [];
 
       if (searchQuery) {
