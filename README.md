@@ -3,7 +3,7 @@
 ## Overview
 This repository contains the frontend of a blog website built using **React (JSX)**. The frontend fetches data from the backend APIs created using **Django Rest Framework (DRF)**. The blog allows users to browse posts, view categories, and interact with content dynamically.
 
-🔗 **Live Backend API URL:** [https://frontendrepo-37te-1s6f8vzdi-vikas-projects-2e7e375b.vercel.app](https://frontendrepo-37te-1s6f8vzdi-vikas-projects-2e7e375b.vercel.app))
+🔗 **Live Backend API URL:** (https://frontendrepo-pdg8-aoj3f83d7-vikas-projects-2e7e375b.vercel.app/))
 
 ## Features
 - **Fetch and Display Blog Posts**
