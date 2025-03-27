@@ -12,7 +12,8 @@ import Footer from "./componants/Footer";
 import ScrollToTop from "./componants/ScrollToTop";
 
 import DarkModeToggle from './componants/DarkModeToggle';
-import SubscribeBox from "./componants/subscribebox";
+
+import Newsletter from "./componants/Newsletter";
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
   const [category, setCategory] = useState(null); // Category state
   const [darkMode, setDarkMode] = useState(false); // Dark mode state
   const [categories, setCategories] = useState([]); // For initializing categories
+  const [showNewsletter, setShowNewsletter] = useState(false);
 
   // Dark Mode Toggle
   const toggleDarkMode = () => {
@@ -95,6 +97,18 @@ const App = () => {
     setShowModal(false);
     localStorage.setItem("hasSeenModal", "true");
   };
+
+// Function to show the newsletter popup at random intervals
+useEffect(() => {
+  const interval = setInterval(() => {
+    setShowNewsletter(true);
+    setTimeout(() => {
+      setShowNewsletter(false);
+    }, 10000); // Auto-close after 10 seconds
+  }, 30000); // Show every 30 seconds
+
+  return () => clearInterval(interval);
+}, []);
 
   return (
     <Router>
@@ -170,10 +184,16 @@ const App = () => {
 
           
         </Routes>
-        <SubscribeBox />
+        
        <ScrollToTop />
         <Footer />
-       
+        <button onClick={() => setShowNewsletter(true)} style={{ margin: "20px", padding: "10px 15px", borderRadius: "5px", cursor: "pointer" }}>
+          Show Newsletter
+        </button>
+
+         {/* Show Newsletter Popup */}
+      {showNewsletter && <Newsletter onClose={() => setShowNewsletter(false)} />}
+
       </div>
       
     </Router>
